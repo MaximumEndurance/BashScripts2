@@ -37,19 +37,16 @@ do
 if [ $my_ext == $file_ext ]
 then
 avail_ch+=${loc_arr[$loop_count]}
-echo ${loc_arr[$loop_count]}
 fi
 let loop_count=loop_count+1
 done
 
-echo "${avail_ch[@]}"
-
 # checking for no of extensions. If no of extensions are > 1 prompt a Menu
 
-#if [ "${#avail_ch[@]}" -eq 1 ]
-#then
-#echo `$( cd "$(dirname "${avail_ch[0]}" )" && pwd )`
-#fi
+if [ "${#avail_ch[@]}" -eq 1 ]
+then
+${avail_ch[0]} $file_to_execute
+fi
 
 
 

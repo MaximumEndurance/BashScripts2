@@ -26,28 +26,30 @@ done < $file
 # and paths in system directory in loc_arr
 
 dot_location_in_file_name=`expr index "$file_to_execute" .`
-echo $dot_location_in_file_name
 file_ext="${file_to_execute:$dot_location_in_file_name}"
-echo $file_ext
+
 loop_count=0
 avail_ch=()
+
 for my_ext in "${ext_arr[@]}" 
 do
-echo "$my_ext $file_ext"
-if [ my_ext == file_ext ]
+
+if [ $my_ext == $file_ext ]
 then
 avail_ch+=${loc_arr[$loop_count]}
+echo ${loc_arr[$loop_count]}
 fi
+let loop_count=loop_count+1
 done
 
 echo "${avail_ch[@]}"
 
 # checking for no of extensions. If no of extensions are > 1 prompt a Menu
 
-if [ "${#avail_ch[@]}" -eq 1 ]
-then
-echo `$( cd "$(dirname "${avail_ch[0]}" )" && pwd )`
-fi
+#if [ "${#avail_ch[@]}" -eq 1 ]
+#then
+#echo `$( cd "$(dirname "${avail_ch[0]}" )" && pwd )`
+#fi
 
 
 

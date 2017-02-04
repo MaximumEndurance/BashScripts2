@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Some extensions in myopen.cfg have been changed duo to incompatibility of paths in my system
 if [ $# -ne 1 ]
 then
 echo "Please enter file name. Thank You!"
@@ -50,13 +51,13 @@ elif [ "${#avail_ch[@]}" -eq 0 ]
 then
 ## Add new entry
 
-echo -e "\n\nSorry! myopen does not recognise this extension\n\n"
+echo -e "\n\n:Sorry! myopen does not recognise this extension\n\n"
 echo -e "\nPlease enter path of script to execute .$file_ext files\n"
 
 read new_path
-$new_path $file_to_execute &
-
-if [ $? -eq 1 ] # $? gives return status. Gives 0 for successful implementation
+$new_path $file_to_execute
+# This code segment is currently not working if an incompatible program is provided to execute file. 
+if [ $? -eq 0 ] # $? gives return status. Gives 0 for successful implementation
 then
 echo "$file_ext:$new_path" >> $file
 echo -e "\n\n$file_ext:$new_path has been successfully updated\n\n" 

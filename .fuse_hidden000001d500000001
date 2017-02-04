@@ -16,6 +16,7 @@ loc_arr=()
 while read -r line;
 do
 colon_location=`expr index "$line" :`
+echo $colon_location
 ext_arr+=(${line:0:colon_location-1})
 loc_arr+=(${line:colon_location})
 
@@ -35,7 +36,7 @@ do
 
 if [ $my_ext == $file_ext ]
 then
-avail_ch+=(${loc_arr[$loop_count]})
+avail_ch+=`${loc_arr[$loop_count]}`
 
 fi
 let loop_count=loop_count+1
@@ -71,16 +72,16 @@ echo "Whoa! There seem to be multiple programs available for executing $file"
 echo "$USER, please choose the program that you want to use"
 
 local_counter=0
-for possible_ext in "${avail_ch[@]}"
+for possible_ext in "${avail_ch}"
 do 
-echo "($local_counter+1) : $possible_ext"
+echo "$local_counter : $possible_ext"
 let local_counter=local_counter+1
 done
 
 read ch
 
 echo Executing using ${avail_ch[$ch-1]}
-${avail_ch[$ch-1]} $file_to_execute &
+${avail_ch[$ch-1]} $file_to_execute
 fi
  
 
